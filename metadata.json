@@ -1,0 +1,6 @@
+{
+  "name": "كل سنة وانتي طيبة يا ملك ♡",
+  "description": "تجربة تفاعلية احتفالية خاصة بعيد ميلاد ملك — شجرة الحب ورسائل الصديقات",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

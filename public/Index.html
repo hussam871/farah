@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>كل سنة وانتي طيبة يا ملك ♡</title>
+  <meta name="description" content="هدية رقمية احتفالية خاصة بعيد ميلاد ملك — شجرة الحب ورسائل الصديقات" />
+  <style>
+    /* ==========================================================================
+       1. المتغيرات اللونية والأساسيات ( الهوية البصرية الفاخرة )
+       ========================================================================== */
+    :root {
+      --bg-deep: #080608;
+      --bg-surface: rgba(20, 11, 18, 0.76);
+      --bg-surface-active: rgba(30, 14, 25, 0.88);
+      --pink-primary: #FF4F9A;
+      --pink-light: #FFB6D5;
+      --pink-soft: #FF85B8;
+      --pink-deep: #D92672;
+      --white-warm: #FFF5FA;
+      --text-muted: rgba(255, 245, 250, 0.75);
+      --text-subtle: rgba(255, 182, 213, 0.62);
+      --border-soft: rgba(255, 182, 213, 0.22);
+      --border-glow: rgba(255, 79, 154, 0.55);
+      --shadow-pink: 0 12px 42px -8px rgba(255, 79, 154, 0.28);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --font-arabic: 'Geeza Pro', 'Noto Naskh Arabic', 'Amiri', 'Segoe UI', Tahoma, system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    *::-webkit-scrollbar,
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg-deep);
+      color: var(--white-warm);
+      font-family: var(--font-arabic);
+      direction: rtl;
+      text-align: right;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      position: relative;
+      min-height: 100dvh;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255, 79, 154, 0.11) 0%, transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(255, 182, 213, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 15% 75%, rgba(255, 79, 154, 0.07) 0%, transparent 45%),
+        var(--bg-deep);
+    }
+
+    /* سماح تحديد النصوص بشكل طبيعي وأنيق */
+    ::selection {
+      background: rgba(255, 79, 154, 0.32);
+      color: var(--white-warm);
+    }
+
+    /* ==========================================================================
+       2. خلفية الجسيمات والقلوب العائمة والألعاب النارية
+       ========================================================================== */
+    #ambient-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .ambient-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, transparent 52%, rgba(8, 6, 8, 0.68) 100%);
+    }
+
+    /* ==========================================================================
+       3. إدارة الشاشات والانتقالات السينمائية
+       ========================================================================== */
+    .app-stage {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    .screen {
+      width: 100%;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 3vw, 2.5rem) clamp(1rem, 4vw, 2rem);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo), visibility 0.9s;
+      will-change: opacity, transform;
+    }
+
+    .screen--hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      transform: translateY(24px) scale(0.985);
+      height: 0;
+      min-height: 0;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .screen--active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      position: relative;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ==========================================================================
+       4. الشاشة الأولى: شجرة الحب والرسالة الترحيبية
+       ========================================================================== */
+    .hero-container {
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+    }
+
+    .tree-stage-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      height: clamp(300px, 48dvh, 450px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .tree-crown-glow {
+      position: absolute;
+      top: 12%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      width: 68%;
+      height: 62%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 79, 154, 0.24) 0%, rgba(255, 182, 213, 0.08) 48%, transparent 72%);
+      filter: blur(22px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.8s ease, transform 1.8s ease;
+    }
+
+    .tree-crown-glow.is-blooming {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+      animation: crownPulse 4.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes crownPulse {
+      0% {
+        opacity: 0.72;
+        transform: translateX(-50%) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.07);
+      }
+    }
+
+    #tree-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tree-ground-line {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 62%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 182, 213, 0.45) 30%, rgba(255, 79, 154, 0.85) 50%, rgba(255, 182, 213, 0.45) 70%, transparent 100%);
+      box-shadow: 0 0 18px rgba(255, 79, 154, 0.65);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    /* النصوص أسفل الشجرة */
+    .greeting-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+      max-width: 620px;
+      padding: 0 0.5rem;
+    }
+
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.95s var(--ease-out-expo), transform 0.95s var(--ease-out-expo);
+      pointer-events: none;
+    }
+
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .main-birthday-title {
+      font-size: clamp(1.75rem, 4.8vw, 2.85rem);
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--white-warm);
+      letter-spacing: 0.01em;
+      text-align: center;
+      text-wrap: balance;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.38rem;
+      text-shadow: 0 4px 24px rgba(255, 79, 154, 0.25);
+    }
+
+    .malak-highlight {
+      font-size: 1.16em;
+      color: var(--pink-light);
+      background: linear-gradient(135deg, #FFF5FA 10%, #FFB6D5 48%, #FF4F9A 95%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 28px rgba(255, 79, 154, 0.65);
+      filter: drop-shadow(0 0 12px rgba(255, 79, 154, 0.38));
+      padding: 0 0.12em;
+      display: inline-block;
+    }
+
+    .pulsing-heart-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pink-primary);
+      text-shadow: 0 0 16px rgba(255, 79, 154, 0.85);
+      animation: gentleHeartBeat 1.8s ease-in-out infinite;
+      margin-right: 0.15rem;
+    }
+
+    @keyframes gentleHeartBeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.22); }
+      45% { transform: scale(0.96); }
+      65% { transform: scale(1.14); }
+    }
+
+    .sub-birthday-lead {
+      font-size: clamp(1.02rem, 2.4vw, 1.28rem);
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 48ch;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    /* الزر الرئيسي */
+    .cta-button-wrap {
+      margin-top: 0.65rem;
+    }
+
+    .luxury-btn {
+      position: relative;
+      appearance: none;
+      border: 1px solid rgba(255, 245, 250, 0.35);
+      background: linear-gradient(135deg, #FF4F9A 0%, #E02E7B 55%, #FF78B4 100%);
+      color: var(--white-warm);
+      font-family: var(--font-arabic);
+      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+      font-weight: 700;
+      padding: 0.9rem 2.2rem;
+      min-height: 52px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      box-shadow:
+        0 10px 30px -4px rgba(255, 79, 154, 0.52),
+        0 0 0 1px rgba(255, 182, 213, 0.22) inset,
+        0 2px 12px rgba(255, 245, 250, 0.25) inset;
+      transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo), filter 0.2s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+
+    .luxury-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow:
+        0 16px 38px -4px rgba(255, 79, 154, 0.72),
+        0 0 24px rgba(255, 182, 213, 0.45),
+        0 2px 14px rgba(255, 245, 250, 0.35) inset;
+      filter: brightness(1.06);
+    }
+
+    .luxury-btn:active {
+      transform: translateY(1px) scale(0.97);
+    }
+
+    .luxury-btn:focus-visible {
+      outline: 3px solid var(--pink-light);
+      outline-offset: 4px;
+    }
+
+    .luxury-btn .btn-heart-icon {
+      display: inline-block;
+      transition: transform 0.25s var(--ease-spring);
+    }
+
+    .luxury-btn:hover .btn-heart-icon,
+    .luxury-btn:active .btn-heart-icon {
+      transform: scale(1.32) rotate(-8deg);
+    }
+
+    /* ==========================================================================
+       5. الشاشة الثانية: رسائل من صديقات ملك
+       ========================================================================== */
+    #messages-screen {
+      justify-content: flex-start;
+      padding-top: clamp(2rem, 5vw, 3.5rem);
+      padding-bottom: clamp(3rem, 7vw, 5rem);
+      gap: clamp(1.75rem, 4vw, 2.75rem);
+    }
+
+    .messages-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 4.2vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white-warm);
+      text-shadow: 0 0 24px rgba(255, 79, 154, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      text-wrap: balance;
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
+      color: var(--pink-light);
+      opacity: 0.9;
+      line-height: 1.7;
+      text-wrap: balance;
+    }
+
+    /* منطقة استعراض البطاقات (Carousel) */
+    .carousel-region {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .carousel-viewport {
+      width: 100%;
+      position: relative;
+      min-height: clamp(330px, 46dvh, 410px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+      touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+      overflow: hidden;
+      padding: 1.25rem 0;
+    }
+
+    .carousel-viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    .cards-track {
+      position: relative;
+      width: 100%;
+      height: clamp(300px, 42dvh, 370px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* بطاقة الرسالة */
+    .message-card {
+      position: absolute;
+      width: min(88vw, 540px);
+      min-height: clamp(280px, 38dvh, 350px);
+      max-height: 430px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-soft);
+      border-radius: 26px;
+      padding: clamp(1.5rem, 4vw, 2.35rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      box-shadow:
+        0 18px 45px -12px rgba(0, 0, 0, 0.78),
+        0 0 28px -8px rgba(255, 79, 154, 0.16);
+      transition:
+        transform 0.6s var(--ease-out-expo),
+        opacity 0.6s var(--ease-out-expo),
+        border-color 0.45s ease,
+        box-shadow 0.45s ease,
+        background-color 0.45s ease;
+      will-change: transform, opacity;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    /* اختلافات دقيقة ومدروسة في الزخارف والإضاءة لكل بطاقة */
+    .message-card[data-variant="0"] {
+      background:
+        radial-gradient(circle at 12% 15%, rgba(255, 79, 154, 0.15) 0%, transparent 50%),
+        var(--bg-surface);
+      border-radius: 28px 22px 28px 22px;
+    }
+
+    .message-card[data-variant="1"] {
+      background:
+        radial-gradient(circle at 88% 18%, rgba(255, 182, 213, 0.14) 0%, transparent 52%),
+        var(--bg-surface);
+      border-radius: 22px 28px 22px 28px;
+    }
+
+    .message-card[data-variant="2"] {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 79, 154, 0.16) 0%, transparent 55%),
+        var(--bg-surface);
+      border-radius: 26px;
+    }
+
+    .message-card[data-variant="3"] {
+      background:
+        radial-gradient(circle at 20% 85%, rgba(255, 182, 213, 0.14) 0%, transparent 52%),
+        var(--bg-surface);
+      border-radius: 24px 30px 24px 30px;
+    }
+
+    /* البطاقة النشطة */
+    .message-card.is-active {
+      z-index: 10;
+      opacity: 1;
+      border-color: var(--border-glow);
+      box-shadow:
+        0 22px 55px -12px rgba(0, 0, 0, 0.85),
+        0 0 36px -4px rgba(255, 79, 154, 0.34),
+        0 0 0 1px rgba(255, 182, 213, 0.18) inset;
+      cursor: default;
+      user-select: text;
+    }
+
+    .message-card.is-active:hover {
+      box-shadow:
+        0 24px 60px -10px rgba(0, 0, 0, 0.88),
+        0 0 44px -2px rgba(255, 79, 154, 0.45),
+        0 0 0 1px rgba(255, 182, 213, 0.28) inset;
+    }
+
+    /* البطاقة السابقة والتالية (في اتجاه RTL: السابقة على اليمين والتالية على اليسار) */
+    .message-card.is-prev,
+    .message-card.is-next {
+      z-index: 5;
+      opacity: 0.42;
+      cursor: pointer;
+    }
+
+    .message-card.is-prev:hover,
+    .message-card.is-next:hover {
+      opacity: 0.62;
+      border-color: rgba(255, 182, 213, 0.38);
+    }
+
+    .message-card.is-far {
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* زخرفة زاوية البطاقة */
+    .card-corner-glow {
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 79, 154, 0.18) 0%, transparent 70%);
+      top: -45px;
+      left: -45px;
+      pointer-events: none;
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255, 182, 213, 0.14);
+      padding-bottom: 0.9rem;
+    }
+
+    .friend-identity {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-motif-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 79, 154, 0.14);
+      border: 1px solid rgba(255, 182, 213, 0.28);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pink-light);
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(255, 79, 154, 0.22);
+      transition: transform 0.4s var(--ease-spring);
+    }
+
+    .message-card.is-active .card-motif-icon {
+      transform: scale(1.06);
+    }
+
+    .friend-name {
+      font-size: clamp(1.15rem, 2.5vw, 1.38rem);
+      font-weight: 700;
+      color: var(--pink-light);
+      letter-spacing: 0.01em;
+    }
+
+    .card-index-label {
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* محتوى الرسالة مع ظهور تدريجي */
+    .card-message-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      overflow-y: auto;
+      padding: 0.25rem 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.55s ease 0.12s, transform 0.55s ease 0.12s;
+    }
+
+    .message-card.is-active.in-view .card-message-body {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .friend-message-text {
+      font-size: clamp(1.05rem, 2.3vw, 1.24rem);
+      line-height: 1.85;
+      color: var(--white-warm);
+      width: 100%;
+      text-wrap: pretty;
+    }
+
+    .card-footer-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+      padding-top: 0.5rem;
+    }
+
+    .card-footer-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 79, 154, 0.35), transparent);
+      margin-right: 0.75rem;
+    }
+
+    /* أزرار التنقل ومؤشرات البطاقات */
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .nav-arrow-btn {
+      appearance: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 182, 213, 0.32);
+      background: rgba(24, 12, 21, 0.85);
+      color: var(--white-warm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease-out-expo), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-arrow-btn:hover:not(:disabled) {
+      background: rgba(255, 79, 154, 0.22);
+      border-color: var(--pink-primary);
+      box-shadow: 0 0 20px rgba(255, 79, 154, 0.42);
+      transform: scale(1.06);
+    }
+
+    .nav-arrow-btn:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    .nav-arrow-btn:disabled {
+      opacity: 0.32;
+      cursor: not-allowed;
+    }
+
+    .nav-arrow-btn:focus-visible {
+      outline: 2px solid var(--pink-light);
+      outline-offset: 3px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      padding: 0.4rem 0.85rem;
+    }
+
+    .dot-indicator {
+      appearance: none;
+      border: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 182, 213, 0.28);
+      cursor: pointer;
+      transition: width 0.35s var(--ease-out-expo), background-color 0.35s ease, box-shadow 0.35s ease;
+      padding: 0;
+    }
+
+    .dot-indicator:hover {
+      background: rgba(255, 182, 213, 0.58);
+    }
+
+    .dot-indicator.is-active {
+      width: 28px;
+      background: var(--pink-primary);
+      box-shadow: 0 0 12px rgba(255, 79, 154, 0.78);
+    }
+
+    .dot-indicator:focus-visible {
+      outline: 2px solid var(--pink-light);
+      outline-offset: 3px;
+    }
+
+    .swipe-hint {
+      font-size: 0.84rem;
+      color: var(--text-subtle);
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       6. القسم الختامي ( الرسالة الختامية وزر إعادة الاحتفال )
+       ========================================================================== */
+    .finale-section {
+      width: 100%;
+      max-width: 660px;
+      margin: 1.5rem auto 0;
+      padding: clamp(1.75rem, 4vw, 2.6rem) clamp(1.25rem, 4vw, 2.25rem);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 79, 154, 0.18) 0%, transparent 68%),
+        rgba(18, 10, 16, 0.72);
+      border: 1px solid rgba(255, 182, 213, 0.22);
+      box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.75);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.6s ease, box-shadow 0.6s ease, transform 0.6s var(--ease-out-expo);
+    }
+
+    .finale-section.is-celebrating {
+      border-color: rgba(255, 79, 154, 0.62);
+      box-shadow:
+        0 22px 58px -10px rgba(0, 0, 0, 0.85),
+        0 0 42px -4px rgba(255, 79, 154, 0.35);
+    }
+
+    .finale-heading {
+      font-size: clamp(1.4rem, 3.6vw, 2rem);
+      font-weight: 700;
+      color: var(--white-warm);
+      line-height: 1.5;
+      text-shadow: 0 0 20px rgba(255, 79, 154, 0.38);
+      text-wrap: balance;
+    }
+
+    .finale-wish {
+      font-size: clamp(1.02rem, 2.3vw, 1.22rem);
+      color: var(--pink-light);
+      line-height: 1.8;
+      max-width: 46ch;
+      text-wrap: balance;
+    }
+
+    .replay-btn {
+      margin-top: 0.5rem;
+      appearance: none;
+      border: 1px solid rgba(255, 182, 213, 0.45);
+      background: linear-gradient(135deg, rgba(255, 79, 154, 0.26) 0%, rgba(255, 182, 213, 0.14) 100%);
+      color: var(--white-warm);
+      font-family: var(--font-arabic);
+      font-size: clamp(1rem, 2.1vw, 1.14rem);
+      font-weight: 700;
+      padding: 0.8rem 1.95rem;
+      min-height: 48px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      box-shadow: 0 8px 26px rgba(255, 79, 154, 0.25);
+      transition: transform 0.2s var(--ease-out-expo), background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+
+    .replay-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: var(--pink-primary);
+      background: linear-gradient(135deg, rgba(255, 79, 154, 0.45) 0%, rgba(255, 182, 213, 0.24) 100%);
+      box-shadow: 0 12px 32px rgba(255, 79, 154, 0.42);
+    }
+
+    .replay-btn:active {
+      transform: translateY(1px) scale(0.97);
+    }
+
+    .replay-btn:focus-visible {
+      outline: 2px solid var(--pink-light);
+      outline-offset: 4px;
+    }
+
+    /* ==========================================================================
+       7. الاستجابة للشاشات وتقليل الحركة (Accessibility & Reduced Motion)
+       ========================================================================== */
+    @media (max-width: 640px) {
+      .tree-stage-wrapper {
+        height: clamp(260px, 42dvh, 340px);
+      }
+
+      .message-card {
+        width: min(88vw, 420px);
+        padding: 1.35rem 1.25rem;
+      }
+
+      .carousel-viewport {
+        min-height: 320px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.15s !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- خلفية الألعاب النارية والقلوب العائمة والجزيئات المضيئة -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+  <div class="ambient-vignette" aria-hidden="true"></div>
+
+  <main class="app-stage">
+    <!-- ======================================================================
+         الشاشة الأولى: شجرة الحب (الشاشة الافتتاحية)
+         ====================================================================== -->
+    <section id="opening-screen" class="screen screen--active" aria-label="شاشة التهنئة الافتتاحية">
+      <div class="hero-container">
+        <div class="tree-stage-wrapper">
+          <div id="tree-crown-glow" class="tree-crown-glow" aria-hidden="true"></div>
+          <canvas id="tree-canvas" aria-label="شجرة الحب المزهرة بقلوب وردية"></canvas>
+          <div class="tree-ground-line" aria-hidden="true"></div>
+        </div>
+
+        <div class="greeting-block">
+          <h1 id="greeting-title" class="main-birthday-title reveal-item">
+            <span>كل سنة وانتي طيبة يا</span>
+            <span class="malak-highlight">ملك</span>
+            <span class="pulsing-heart-inline" aria-hidden="true">♡</span>
+          </h1>
+
+          <p id="greeting-subtitle" class="sub-birthday-lead reveal-item">
+            النهارده يومك، وفي ناس كتير عندهم كلام حلو ليكي...
+          </p>
+
+          <div id="greeting-cta" class="cta-button-wrap reveal-item">
+            <button type="button" id="open-messages-btn" class="luxury-btn" aria-label="انتقلي إلى رسايل من صحابك">
+              <span>رسايل من صحابك</span>
+              <span class="btn-heart-icon" aria-hidden="true">♡</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         الشاشة الثانية: رسائل من صديقات ملك + الرسالة الختامية
+         ====================================================================== -->
+    <section id="messages-screen" class="screen screen--hidden" aria-label="رسائل صديقات ملك">
+      <header class="messages-header">
+        <h2 class="section-title">
+          <span>رسايل من صحابك</span>
+          <span class="pulsing-heart-inline" aria-hidden="true">♡</span>
+        </h2>
+        <p class="section-subtitle">
+          كل رسالة هنا شايلة معاها حتة حب ليكي...
+        </p>
+      </header>
+
+      <div class="carousel-region" aria-roledescription="carousel" aria-label="بطاقات رسائل الصديقات">
+        <div id="carousel-viewport" class="carousel-viewport" tabindex="0" aria-label="اسحبي يمينًا أو يسارًا أو استخدمي الأسهم للتنقل بين الرسائل">
+          <div id="cards-track" class="cards-track" aria-live="polite"></div>
+        </div>
+
+        <div class="carousel-controls">
+          <button type="button" id="prev-card-btn" class="nav-arrow-btn" aria-label="الرسالة السابقة">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <div id="carousel-dots" class="carousel-dots" role="tablist" aria-label="مؤشرات الرسائل"></div>
+
+          <button type="button" id="next-card-btn" class="nav-arrow-btn" aria-label="الرسالة التالية">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <p class="swipe-hint">يمكنكِ السحب يمينًا ويسارًا أو استخدام أسهم لوحة المفاتيح للتنقل بين الرسائل</p>
+      </div>
+
+      <!-- القسم الختامي -->
+      <footer id="finale-section" class="finale-section">
+        <h3 class="finale-heading">وفي الآخر... كل الحب ده ليكي يا ملك ♡</h3>
+        <p class="finale-wish">
+          يا رب سنتك الجديدة تكون مليانة ضحك وراحة بال وأيام حلوة شبه قلبك.
+        </p>
+        <button type="button" id="replay-celebration-btn" class="replay-btn" aria-label="احتفلي تاني والعودة إلى شجرة الحب">
+          <span>احتفلي تاني ✨</span>
+        </button>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    /**
+     * ========================================================================
+     * 1. قسم البيانات المركزي (سهل التعديل والإضافة والحذف)
+     * ملاحظة: هذه بيانات تجريبية (أمثلة) يجب استبدالها بأسماء ورسائل الصديقات
+     * الحقيقية قبل نشر الموقع أو إرساله إلى ملك.
+     * يمكنك إضافة أي عدد من العناصر في هذه المصفوفة دون تعديل HTML أو CSS.
+     * ========================================================================
+     */
+    const FRIENDS_MESSAGES = [
+      {
+        friendName: "[اسم الصديقة الأولى]",
+        message: "[اكتبي هنا رسالة الصديقة الأولى]",
+        motif: "heart" // الخيارات المتاحة: "heart" | "star" | "flower" | "sparkle"
+      },
+      {
+        friendName: "[اسم الصديقة الثانية]",
+        message: "[اكتبي هنا رسالة الصديقة الثانية]",
+        motif: "star"
+      },
+      {
+        friendName: "[اسم الصديقة الثالثة]",
+        message: "[اكتبي هنا رسالة الصديقة الثالثة]",
+        motif: "flower"
+      },
+      {
+        friendName: "[اسم الصديقة الرابعة]",
+        message: "[اكتبي هنا رسالة الصديقة الرابعة]",
+        motif: "sparkle"
+      }
+    ];
+
+    /**
+     * ========================================================================
+     * 2. إعدادات الأداء وتفضيلات تقليل الحركة
+     * ========================================================================
+     */
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobileViewport = () => window.innerWidth < 768;
+
+    /**
+     * ========================================================================
+     * 3. محرك الخلفية الاحتفالية (نقاط الضوء + فقاعات القلوب + الألعاب النارية)
+     * ========================================================================
+     */
+    class AmbientCelebrationEngine {
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext("2d");
+        this.width = 0;
+        this.height = 0;
+        this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        this.stars = [];
+        this.floatingHearts = [];
+        this.fireworks = [];
+        this.sparks = [];
+
+        this.currentScreen = "opening"; // "opening" | "messages"
+        this.lastAutoFireworkTime = performance.now();
+        this.nextAutoFireworkDelay = 2400;
+
+        this.resize();
+        this.initStars();
+        this.initFloatingHearts();
+      }
+
+      resize() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.canvas.width = Math.floor(this.width * this.dpr);
+        this.canvas.height = Math.floor(this.height * this.dpr);
+        this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+      }
+
+      setScreenMode(mode) {
+        this.currentScreen = mode;
+      }
+
+      initStars() {
+        const count = isMobileViewport() ? 38 : 72;
+        this.stars = [];
+        for (let i = 0; i < count; i++) {
+          this.stars.push({
+            x: Math.random() * this.width,
+            y: Math.random() * this.height,
+            radius: 0.7 + Math.random() * 1.8,
+            baseAlpha: 0.15 + Math.random() * 0.45,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.008 + Math.random() * 0.02,
+            vx: (Math.random() - 0.5) * 0.12,
+            vy: (Math.random() - 0.5) * 0.12,
+            color: Math.random() > 0.35 ? "#FFB6D5" : "#FFF5FA"
+          });
+        }
+      }
+
+      createFloatingHeart(startFromBottom = true) {
+        const isSmall = Math.random() > 0.42;
+        const size = isSmall ? 6 + Math.random() * 6 : 12 + Math.random() * 10;
+        const speedY = isSmall ? 0.45 + Math.random() * 0.55 : 0.22 + Math.random() * 0.35;
+        const palette = ["#FF4F9A", "#FFB6D5", "#FF78B4", "#FFF5FA"];
+        return {
+          x: Math.random() * this.width,
+          y: startFromBottom ? this.height + size + Math.random() * 60 : Math.random() * this.height,
+          size,
+          speedY: prefersReducedMotion ? speedY * 0.25 : speedY,
+          driftX: (Math.random() - 0.5) * 0.35,
+          swayAmp: 0.25 + Math.random() * 0.55,
+          swayFreq: 0.008 + Math.random() * 0.014,
+          phase: Math.random() * Math.PI * 2,
+          rotation: (Math.random() - 0.5) * 0.5,
+          rotationSpeed: (Math.random() - 0.5) * 0.008,
+          alpha: 0.12 + Math.random() * 0.32,
+          color: palette[Math.floor(Math.random() * palette.length)]
+        };
+      }
+
+      initFloatingHearts() {
+        const count = isMobileViewport() ? 14 : 24;
+        this.floatingHearts = [];
+        for (let i = 0; i < count; i++) {
+          this.floatingHearts.push(this.createFloatingHeart(false));
+        }
+      }
+
+      launchFirework(targetX, targetY, particleCount = 34) {
+        if (prefersReducedMotion) return;
+        const maxSparks = isMobileViewport() ? 160 : 300;
+        if (this.sparks.length > maxSparks) return;
+
+        const palette = ["#FF4F9A", "#FFB6D5", "#FFF5FA", "#E5B8FF", "#FF75B5"];
+        const actualCount = isMobileViewport() ? Math.round(particleCount * 0.7) : particleCount;
+
+        for (let i = 0; i < actualCount; i++) {
+          const angle = (Math.PI * 2 * i) / actualCount + (Math.random() - 0.5) * 0.25;
+          const speed = 1.4 + Math.random() * 4.2;
+          this.sparks.push({
+            x: targetX,
+            y: targetY,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            gravity: 0.045,
+            drag: 0.975,
+            alpha: 0.95,
+            decay: 0.012 + Math.random() * 0.014,
+            size: 1.5 + Math.random() * 2.2,
+            color: palette[Math.floor(Math.random() * palette.length)]
+          });
+        }
+      }
+
+      launchCelebrationSalvo(intensity = 3) {
+        if (prefersReducedMotion) return;
+        for (let i = 0; i < intensity; i++) {
+          setTimeout(() => {
+            const x = this.width * (0.2 + Math.random() * 0.6);
+            const y = this.height * (0.15 + Math.random() * 0.38);
+            this.launchFirework(x, y, 42);
+          }, i * 260);
+        }
+      }
+
+      drawHeartPath(ctx, x, y, size, rotation) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        ctx.beginPath();
+        const s = size * 0.5;
+        ctx.moveTo(0, s * 0.4);
+        ctx.bezierCurveTo(0, -s * 0.35, -s, -s * 0.35, -s, s * 0.2);
+        ctx.bezierCurveTo(-s, s * 0.75, 0, s * 1.1, 0, s * 1.45);
+        ctx.bezierCurveTo(0, s * 1.1, s, s * 0.75, s, s * 0.2);
+        ctx.bezierCurveTo(s, -s * 0.35, 0, -s * 0.35, 0, s * 0.4);
+        ctx.closePath();
+        ctx.restore();
+      }
+
+      updateAndDraw(now) {
+        const ctx = this.ctx;
+        ctx.clearRect(0, 0, this.width, this.height);
+
+        // تقليل الكثافة قليلًا في شاشة الرسائل لسهولة القراءة
+        const densityMultiplier = this.currentScreen === "messages" ? 0.68 : 1;
+
+        // 1. رسم نقاط الضوء المتناثرة
+        for (let i = 0; i < this.stars.length; i++) {
+          const st = this.stars[i];
+          st.phase += st.speed;
+          st.x += st.vx;
+          st.y += st.vy;
+
+          if (st.x < 0) st.x = this.width;
+          if (st.x > this.width) st.x = 0;
+          if (st.y < 0) st.y = this.height;
+          if (st.y > this.height) st.y = 0;
+
+          const twinkle = st.baseAlpha + Math.sin(st.phase) * 0.18;
+          const alpha = Math.max(0.05, Math.min(0.8, twinkle * densityMultiplier));
+
+          ctx.save();
+          ctx.globalAlpha = alpha;
+          ctx.fillStyle = st.color;
+          ctx.beginPath();
+          ctx.arc(st.x, st.y, st.radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // 2. تحديث ورسم فقاعات القلوب العائمة
+        for (let i = 0; i < this.floatingHearts.length; i++) {
+          const h = this.floatingHearts[i];
+          h.phase += h.swayFreq;
+          h.y -= h.speedY;
+          h.x += h.driftX + Math.sin(h.phase) * h.swayAmp;
+          h.rotation += h.rotationSpeed;
+
+          if (h.y < -30) {
+            this.floatingHearts[i] = this.createFloatingHeart(true);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = h.alpha * densityMultiplier;
+          ctx.fillStyle = h.color;
+          this.drawHeartPath(ctx, h.x, h.y, h.size, h.rotation);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // 3. إطلاق ألعاب نارية تلقائية على فترات متفاوتة وغير منتظمة
+        if (!prefersReducedMotion && now - this.lastAutoFireworkTime > this.nextAutoFireworkDelay) {
+          this.lastAutoFireworkTime = now;
+          const baseDelay = this.currentScreen === "messages" ? 3800 : 2500;
+          this.nextAutoFireworkDelay = baseDelay + Math.random() * 3200;
+
+          const fx = this.width * (0.14 + Math.random() * 0.72);
+          const fy = this.height * (0.12 + Math.random() * 0.36);
+          this.launchFirework(fx, fy, this.currentScreen === "messages" ? 24 : 32);
+        }
+
+        // 4. تحديث ورسم شظايا الألعاب النارية مع إزالتها فور انتهاء حركتها
+        for (let i = this.sparks.length - 1; i >= 0; i--) {
+          const sp = this.sparks[i];
+          sp.vx *= sp.drag;
+          sp.vy = sp.vy * sp.drag + sp.gravity;
+          sp.x += sp.vx;
+          sp.y += sp.vy;
+          sp.alpha -= sp.decay;
+
+          if (sp.alpha <= 0.02) {
+            this.sparks.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = sp.alpha;
+          ctx.fillStyle = sp.color;
+          ctx.shadowColor = sp.color;
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+    }
+
+    /**
+     * ========================================================================
+     * 4. محرك شجرة الحب (نمو الجذع والفروع والقلوب المتفتحة والمتساقطة)
+     * ========================================================================
+     */
+    class LoveTreeEngine {
+      constructor(canvas, onGrowthComplete) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext("2d");
+        this.onGrowthComplete = onGrowthComplete;
+        this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+        this.width = 0;
+        this.height = 0;
+
+        this.branches = [];
+        this.heartLeaves = [];
+        this.fallingHearts = [];
+        this.crownSparkles = [];
+
+        this.startTime = 0;
+        this.totalGrowthDuration = prefersReducedMotion ? 900 : 5600; // ~5.6 ثوانٍ
+        this.hasTriggeredCompletion = false;
+        this.lastFallingSpawn = 0;
+
+        this.resize();
+        this.buildTreeStructure();
+      }
+
+      resize() {
+        const rect = this.canvas.getBoundingClientRect();
+        this.width = rect.width || 480;
+        this.height = rect.height || 380;
+        this.canvas.width = Math.floor(this.width * this.dpr);
+        this.canvas.height = Math.floor(this.height * this.dpr);
+        this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+      }
+
+      // إنشاء هيكل متوازن وطبيعي للشجرة مع أوراق على شكل قلوب وردية
+      buildTreeStructure() {
+        this.branches = [];
+        this.heartLeaves = [];
+        this.fallingHearts = [];
+        this.crownSparkles = [];
+
+        const rootX = this.width * 0.5;
+        const rootY = this.height - 12;
+        const trunkLength = Math.min(this.width, this.height) * 0.25;
+
+        // دالة تعاودية لتوليد الفروع بصورة عضوية
+        const generateBranch = (x1, y1, length, angle, depth, maxDepth, startProgress, endProgress, thickness) => {
+          const x2 = x1 + Math.cos(angle) * length;
+          const y2 = y1 + Math.sin(angle) * length;
+
+          // نقطة تحكم لمنحنى بيزير لجعل الفرع عضويًا غير مستقيم بشكل جامد
+          const midX = (x1 + x2) / 2 + Math.sin(angle * 2.3 + depth) * (length * 0.11);
+          const midY = (y1 + y2) / 2 - Math.cos(angle * 1.7) * (length * 0.08);
+
+          const branchIndex = this.branches.length;
+          this.branches.push({
+            x1, y1, midX, midY, x2, y2,
+            depth,
+            maxDepth,
+            startProgress,
+            endProgress,
+            thicknessStart: thickness,
+            thicknessEnd: Math.max(1.2, thickness * 0.68),
+            swayFactor: (depth / maxDepth) * 3.2,
+            swayPhase: depth * 0.8 + (x2 * 0.02)
+          });
+
+          // إضافة قلوب وردية على الفروع الوسطى والنهائية
+          if (depth >= 2) {
+            const leafColors = ["#FF4F9A", "#FFB6D5", "#FF78B4", "#FF2E88", "#FFD1E6", "#FFF5FA"];
+            const leavesOnBranch = depth === maxDepth ? 5 : depth >= 4 ? 3 : 2;
+            for (let i = 0; i < leavesOnBranch; i++) {
+              const t = 0.35 + (i / leavesOnBranch) * 0.65;
+              const bx = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * midX + t * t * x2;
+              const by = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * midY + t * t * y2;
+              const spread = (depth === maxDepth ? 22 : 14);
+              const offsetX = (Math.sin(branchIndex * 7.1 + i * 2.3) * spread);
+              const offsetY = (Math.cos(branchIndex * 5.3 + i * 3.1) * spread);
+
+              const appearAt = Math.min(0.96, endProgress * 0.72 + 0.32 + (i * 0.035));
+              this.heartLeaves.push({
+                baseX: bx + offsetX,
+                baseY: by + offsetY,
+                size: 8.5 + (Math.abs(Math.sin(branchIndex + i * 1.9)) * 10.5),
+                color: leafColors[(branchIndex + i) % leafColors.length],
+                appearAt,
+                bloomDuration: 0.16,
+                rotation: ((branchIndex * 19 + i * 31) % 50 - 25) * (Math.PI / 180),
+                swayFactor: 2.2 + (depth * 0.55),
+                swayPhase: branchIndex * 0.4 + i,
+                hasGlow: (branchIndex + i) % 3 === 0
+              });
+            }
+          }
+
+          if (depth < maxDepth) {
+            const nextStart = endProgress * 0.88;
+            const nextEnd = Math.min(0.68, nextStart + 0.115);
+
+            // تفرع ثنائي أو ثلاثي متناغم
+            const leftAngle = angle - (0.34 + (depth % 2) * 0.08);
+            const rightAngle = angle + (0.32 + ((depth + 1) % 2) * 0.09);
+
+            generateBranch(
+              x2, y2,
+              length * (0.74 + (depth === 1 ? 0.05 : 0)),
+              leftAngle,
+              depth + 1,
+              maxDepth,
+              nextStart,
+              nextEnd,
+              thickness * 0.68
+            );
+
+            generateBranch(
+              x2, y2,
+              length * (0.76),
+              rightAngle,
+              depth + 1,
+              maxDepth,
+              nextStart + 0.015,
+              nextEnd + 0.015,
+              thickness * 0.68
+            );
+
+            // فرع أوسط إضافي في المستويات الأولى لامتلاء التاج
+            if (depth === 1 || depth === 2) {
+              const centerAngle = angle + (depth === 1 ? 0.05 : -0.06);
+              generateBranch(
+                x2, y2,
+                length * 0.68,
+                centerAngle,
+                depth + 1,
+                maxDepth,
+                nextStart + 0.02,
+                nextEnd + 0.02,
+                thickness * 0.6
+              );
+            }
+          }
+        };
+
+        // البدء بالجذع الرئيسي من الأسفل إلى الأعلى (-Math.PI / 2)
+        generateBranch(rootX, rootY, trunkLength, -Math.PI / 2, 1, 6, 0.04, 0.22, 13.5);
+
+        // جزيئات مضيئة حول تاج الشجرة
+        for (let i = 0; i < 22; i++) {
+          const angle = (Math.PI * 2 * i) / 22;
+          const rx = this.width * (0.14 + (i % 4) * 0.06);
+          const ry = this.height * (0.12 + (i % 3) * 0.06);
+          this.crownSparkles.push({
+            x: rootX + Math.cos(angle) * rx,
+            y: this.height * 0.42 + Math.sin(angle) * ry,
+            radius: 1.2 + (i % 3) * 0.9,
+            phase: i * 0.7
+          });
+        }
+      }
+
+      resetAndPlay() {
+        this.resize();
+        this.buildTreeStructure();
+        this.startTime = performance.now();
+        this.hasTriggeredCompletion = false;
+        this.lastFallingSpawn = 0;
+      }
+
+      // منحنى ارتداد ناعم لتفتح القلوب كالأزهار
+      easeOutBack(x) {
+        const c1 = 1.70158;
+        const c3 = c1 + 1;
+        return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+      }
+
+      drawHeart(ctx, x, y, size, rotation, color, alpha, withGlow = false) {
+        if (size <= 0.2 || alpha <= 0.01) return;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+
+        if (withGlow) {
+          ctx.shadowColor = "#FF4F9A";
+          ctx.shadowBlur = 10;
+        }
+
+        const s = size * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(0, s * 0.35);
+        ctx.bezierCurveTo(0, -s * 0.4, -s, -s * 0.4, -s, s * 0.18);
+        ctx.bezierCurveTo(-s, s * 0.72, 0, s * 1.08, 0, s * 1.42);
+        ctx.bezierCurveTo(0, s * 1.08, s, s * 0.72, s, s * 0.18);
+        ctx.bezierCurveTo(s, -s * 0.4, 0, -s * 0.4, 0, s * 0.35);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      spawnFallingHeart() {
+        if (this.heartLeaves.length === 0 || this.fallingHearts.length >= 10) return;
+        const source = this.heartLeaves[Math.floor(Math.random() * this.heartLeaves.length)];
+        this.fallingHearts.push({
+          x: source.baseX,
+          y: source.baseY,
+          size: source.size * 0.82,
+          color: source.color,
+          vy: 0.48 + Math.random() * 0.55,
+          vx: (Math.random() - 0.5) * 0.35,
+          phase: Math.random() * Math.PI * 2,
+          rotation: source.rotation,
+          rotationSpeed: (Math.random() - 0.5) * 0.025,
+          alpha: 0.92
+        });
+      }
+
+      updateAndDraw(now) {
+        if (!this.startTime) this.startTime = now;
+        const elapsed = now - this.startTime;
+        const progress = Math.min(1, elapsed / this.totalGrowthDuration);
+        const swayTime = now * 0.0016;
+        const windEnabled = prefersReducedMotion ? 0 : 1;
+
+        const ctx = this.ctx;
+        ctx.clearRect(0, 0, this.width, this.height);
+
+        const rootX = this.width * 0.5;
+        const rootY = this.height - 12;
+
+        // 1. الضوء الوردي النابض على الأرض في بداية المشهد وطوال العرض
+        const seedPulse = 1 + Math.sin(now * 0.005) * 0.18;
+        const seedGrad = ctx.createRadialGradient(rootX, rootY, 2, rootX, rootY, 34 * seedPulse);
+        seedGrad.addColorStop(0, "rgba(255, 245, 250, 0.95)");
+        seedGrad.addColorStop(0.35, "rgba(255, 79, 154, 0.65)");
+        seedGrad.addColorStop(1, "rgba(255, 79, 154, 0)");
+        ctx.save();
+        ctx.fillStyle = seedGrad;
+        ctx.beginPath();
+        ctx.arc(rootX, rootY, 34 * seedPulse, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // 2. رسم الجذع والفروع تدريجيًا مع تمايل عضوي خفيف
+        for (let i = 0; i < this.branches.length; i++) {
+          const b = this.branches[i];
+          if (progress < b.startProgress) continue;
+
+          const localProg = Math.min(1, (progress - b.startProgress) / (b.endProgress - b.startProgress));
+          const swayOffset = Math.sin(swayTime + b.swayPhase) * b.swayFactor * windEnabled * Math.min(1, progress * 1.2);
+          const parentSway = Math.sin(swayTime + b.swayPhase - 0.6) * (b.swayFactor * 0.55) * windEnabled * Math.min(1, progress * 1.2);
+
+          const sx1 = b.x1 + (b.depth > 1 ? parentSway : 0);
+          const sy1 = b.y1;
+          const smidX = b.midX + (parentSway + swayOffset) * 0.5;
+          const smidY = b.midY;
+          const sx2 = b.x2 + swayOffset;
+          const sy2 = b.y2;
+
+          // حساب النقطة الحالية أثناء النمو التدريجي
+          const t = localProg;
+          const curX = (1 - t) * (1 - t) * sx1 + 2 * (1 - t) * t * smidX + t * t * sx2;
+          const curY = (1 - t) * (1 - t) * sy1 + 2 * (1 - t) * t * smidY + t * t * sy2;
+          const ctrlX = (1 - t) * sx1 + t * smidX;
+          const ctrlY = (1 - t) * sy1 + t * smidY;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(sx1, sy1);
+          ctx.quadraticCurveTo(ctrlX, ctrlY, curX, curY);
+
+          const branchGrad = ctx.createLinearGradient(sx1, sy1, sx2, sy2);
+          branchGrad.addColorStop(0, "#4A1E34");
+          branchGrad.addColorStop(0.6, "#7A2E52");
+          branchGrad.addColorStop(1, "#C85A8E");
+
+          ctx.strokeStyle = branchGrad;
+          ctx.lineWidth = b.thicknessStart * (1 - localProg * 0.25);
+          ctx.lineCap = "round";
+          ctx.shadowColor = "rgba(255, 79, 154, 0.28)";
+          ctx.shadowBlur = 6;
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // 3. تفتح أوراق الشجرة (جميعها على شكل قلوب وردية)
+        for (let i = 0; i < this.heartLeaves.length; i++) {
+          const leaf = this.heartLeaves[i];
+          if (progress < leaf.appearAt) continue;
+
+          const rawLeafProg = Math.min(1, (progress - leaf.appearAt) / leaf.bloomDuration);
+          const scale = this.easeOutBack(rawLeafProg);
+          const swayX = Math.sin(swayTime * 1.15 + leaf.swayPhase) * leaf.swayFactor * windEnabled;
+          const swayY = Math.cos(swayTime * 0.9 + leaf.swayPhase) * (leaf.swayFactor * 0.35) * windEnabled;
+          const rot = leaf.rotation + Math.sin(swayTime + leaf.swayPhase) * 0.08 * windEnabled;
+
+          this.drawHeart(
+            ctx,
+            leaf.baseX + swayX,
+            leaf.baseY + swayY,
+            leaf.size * scale,
+            rot,
+            leaf.color,
+            Math.min(0.95, rawLeafProg * 1.1),
+            leaf.hasGlow
+          );
+        }
+
+        // 4. بعد اكتمال نمو الشجرة: جزيئات مضيئة حول التاج + تساقط بطيء لبعض القلوب
+        if (progress >= 0.88) {
+          const crownAlpha = Math.min(1, (progress - 0.88) / 0.12);
+          for (let i = 0; i < this.crownSparkles.length; i++) {
+            const sp = this.crownSparkles[i];
+            const a = (0.3 + Math.sin(now * 0.004 + sp.phase) * 0.3) * crownAlpha;
+            ctx.save();
+            ctx.globalAlpha = Math.max(0.05, a);
+            ctx.fillStyle = "#FFF5FA";
+            ctx.shadowColor = "#FF4F9A";
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.arc(
+              sp.x + Math.sin(swayTime + sp.phase) * 4 * windEnabled,
+              sp.y + Math.cos(swayTime + sp.phase) * 3 * windEnabled,
+              sp.radius,
+              0,
+              Math.PI * 2
+            );
+            ctx.fill();
+            ctx.restore();
+          }
+
+          if (!prefersReducedMotion && now - this.lastFallingSpawn > 780) {
+            this.lastFallingSpawn = now;
+            this.spawnFallingHeart();
+          }
+        }
+
+        // 5. تحديث ورسم القلوب المتساقطة من الشجرة وتلاشيها قبل أسفل الشاشة
+        const groundThreshold = this.height - 22;
+        for (let i = this.fallingHearts.length - 1; i >= 0; i--) {
+          const fh = this.fallingHearts[i];
+          fh.phase += 0.035;
+          fh.y += fh.vy;
+          fh.x += fh.vx + Math.sin(fh.phase) * 0.45;
+          fh.rotation += fh.rotationSpeed;
+
+          // تتلاشى تدريجيًا قبل الوصول إلى الأرض
+          if (fh.y > groundThreshold - 70) {
+            fh.alpha -= 0.022;
+          }
+
+          if (fh.alpha <= 0.02 || fh.y >= groundThreshold) {
+            this.fallingHearts.splice(i, 1);
+            continue;
+          }
+
+          this.drawHeart(ctx, fh.x, fh.y, fh.size, fh.rotation, fh.color, fh.alpha, false);
+        }
+
+        // 6. إطلاق حدث اكتمال النمو الأولي لإظهار الرسالة والزر
+        if (progress >= 0.92 && !this.hasTriggeredCompletion) {
+          this.hasTriggeredCompletion = true;
+          if (typeof this.onGrowthComplete === "function") {
+            this.onGrowthComplete();
+          }
+        }
+      }
+    }
+
+    /**
+     * ========================================================================
+     * 5. إدارة البطاقات، التنقل التفاعلي، والانتقالات بين الشاشات
+     * ========================================================================
+     */
+    class BirthdayExperienceController {
+      constructor() {
+        // عناصر الشاشات
+        this.openingScreen = document.getElementById("opening-screen");
+        this.messagesScreen = document.getElementById("messages-screen");
+        this.treeCrownGlow = document.getElementById("tree-crown-glow");
+
+        // عناصر النصوص في الشاشة الافتتاحية
+        this.greetingTitle = document.getElementById("greeting-title");
+        this.greetingSubtitle = document.getElementById("greeting-subtitle");
+        this.greetingCta = document.getElementById("greeting-cta");
+
+        // الأزرار
+        this.openMessagesBtn = document.getElementById("open-messages-btn");
+        this.replayBtn = document.getElementById("replay-celebration-btn");
+        this.prevCardBtn = document.getElementById("prev-card-btn");
+        this.nextCardBtn = document.getElementById("next-card-btn");
+
+        // عناصر قسم الرسائل
+        this.carouselViewport = document.getElementById("carousel-viewport");
+        this.cardsTrack = document.getElementById("cards-track");
+        this.carouselDots = document.getElementById("carousel-dots");
+        this.finaleSection = document.getElementById("finale-section");
+
+        // الحالة
+        this.currentScreen = "opening";
+        this.activeCardIndex = 0;
+        this.hasCelebratedLastCard = false;
+        this.revealTimers = [];
+        this.cardElements = [];
+        this.dotElements = [];
+        this.cardObserver = null;
+
+        // متغيرات السحب باللمس والماوس
+        this.isDragging = false;
+        this.dragStartX = 0;
+        this.dragStartY = 0;
+        this.dragDeltaX = 0;
+        this.isHorizontalSwipe = null;
+
+        // إنشاء المحركات الرسومية
+        const ambientCanvas = document.getElementById("ambient-canvas");
+        const treeCanvas = document.getElementById("tree-canvas");
+
+        this.ambientEngine = new AmbientCelebrationEngine(ambientCanvas);
+        this.treeEngine = new LoveTreeEngine(treeCanvas, () => this.handleTreeGrowthCompleted());
+
+        this.initCardsDOM();
+        this.bindEvents();
+        this.startOpeningSequence();
+        this.startAnimationLoop();
+      }
+
+      // أيقونات SVG فنية متنوعة لكل بطاقة
+      getMotifSVG(type) {
+        switch (type) {
+          case "star":
+            return `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.7.9-4.9 4.7 1.2 6.7L12 17.7l-5.9 3.2 1.2-6.7-4.9-4.7 6.7-.9L12 2.5z"/></svg>`;
+          case "flower":
+            return `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0-6a3.5 3.5 0 0 1 3.2 4.9A3.5 3.5 0 0 1 20 11.5a3.5 3.5 0 0 1-3.1 3.5 3.5 3.5 0 0 1-1.7 5.5 3.5 3.5 0 0 1-6.4 0A3.5 3.5 0 0 1 7.1 15 3.5 3.5 0 0 1 4 11.5a3.5 3.5 0 0 1 4.8-4.6A3.5 3.5 0 0 1 12 2z"/></svg>`;
+          case "sparkle":
+            return `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z"/></svg>`;
+          case "heart":
+          default:
+            return `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+        }
+      }
+
+      // بناء بطاقات الرسائل ومؤشرات التقدم ديناميكيًا من المصفوفة المركزية
+      initCardsDOM() {
+        this.cardsTrack.innerHTML = "";
+        this.carouselDots.innerHTML = "";
+        this.cardElements = [];
+        this.dotElements = [];
+
+        if (this.cardObserver) {
+          this.cardObserver.disconnect();
+        }
+
+        // استخدام IntersectionObserver لتفعيل ظهور النص عند دخول البطاقة مجال الرؤية
+        this.cardObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+              }
+            });
+          },
+          { threshold: 0.25 }
+        );
+
+        const total = FRIENDS_MESSAGES.length;
+
+        FRIENDS_MESSAGES.forEach((item, index) => {
+          const card = document.createElement("article");
+          card.className = "message-card";
+          card.setAttribute("data-variant", String(index % 4));
+          card.setAttribute("data-index", String(index));
+          card.setAttribute("role", "group");
+          card.setAttribute("aria-roledescription", "slide");
+          card.setAttribute("aria-label", `رسالة ${index + 1} من ${total}`);
+
+          const topRow = document.createElement("div");
+          topRow.className = "card-top-row";
+
+          const identity = document.createElement("div");
+          identity.className = "friend-identity";
+
+          const motifBox = document.createElement("span");
+          motifBox.className = "card-motif-icon";
+          motifBox.innerHTML = this.getMotifSVG(item.motif);
+
+          const nameHeading = document.createElement("h3");
+          nameHeading.className = "friend-name";
+          nameHeading.textContent = item.friendName;
+
+          identity.appendChild(motifBox);
+          identity.appendChild(nameHeading);
+
+          const indexLabel = document.createElement("span");
+          indexLabel.className = "card-index-label";
+          indexLabel.textContent = `${index + 1} / ${total}`;
+
+          topRow.appendChild(identity);
+          topRow.appendChild(indexLabel);
+
+          const bodyWrap = document.createElement("div");
+          bodyWrap.className = "card-message-body";
+
+          const msgParagraph = document.createElement("p");
+          msgParagraph.className = "friend-message-text";
+          msgParagraph.textContent = item.message;
+          bodyWrap.appendChild(msgParagraph);
+
+          const footerOrnament = document.createElement("div");
+          footerOrnament.className = "card-footer-ornament";
+          footerOrnament.innerHTML = `
+            <span>بكل حب لملك ♡</span>
+            <span class="card-footer-line" aria-hidden="true"></span>
+          `;
+
+          const cornerGlow = document.createElement("div");
+          cornerGlow.className = "card-corner-glow";
+          cornerGlow.setAttribute("aria-hidden", "true");
+
+          card.appendChild(cornerGlow);
+          card.appendChild(topRow);
+          card.appendChild(bodyWrap);
+          card.appendChild(footerOrnament);
+
+          // السماح بالنقر على البطاقة السابقة أو التالية للانتقال إليها مباشرة
+          card.addEventListener("click", (e) => {
+            if (Math.abs(this.dragDeltaX) > 10) return;
+            if (index !== this.activeCardIndex) {
+              e.stopPropagation();
+              this.goToCard(index, true);
+            }
+          });
+
+          this.cardsTrack.appendChild(card);
+          this.cardElements.push(card);
+          this.cardObserver.observe(card);
+
+          // إنشاء مؤشر النقطة (Dot)
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "dot-indicator";
+          dot.setAttribute("role", "tab");
+          dot.setAttribute("aria-label", `الانتقال إلى الرسالة ${index + 1}`);
+          dot.addEventListener("click", () => this.goToCard(index, true));
+          this.carouselDots.appendChild(dot);
+          this.dotElements.push(dot);
+        });
+
+        this.updateCarouselPositions(0);
+      }
+
+      // تحديث مواضع البطاقات والمؤشرات وأزرار التنقل (RTL)
+      updateCarouselPositions(dragOffsetPx = 0) {
+        const total = this.cardElements.length;
+        const isMobile = isMobileViewport();
+        const baseStepX = isMobile ? window.innerWidth * 0.82 : 360;
+
+        this.cardElements.forEach((card, index) => {
+          // في RTL: البطاقة التالية (index > active) تكون إلى اليسار، والسابقة إلى اليمين
+          const diff = index - this.activeCardIndex;
+
+          card.classList.remove("is-active", "is-prev", "is-next", "is-far");
+
+          if (diff === 0) {
+            card.classList.add("is-active", "in-view");
+            card.setAttribute("aria-hidden", "false");
+          } else if (diff === -1) {
+            card.classList.add("is-prev");
+            card.setAttribute("aria-hidden", "true");
+          } else if (diff === 1) {
+            card.classList.add("is-next");
+            card.setAttribute("aria-hidden", "true");
+          } else {
+            card.classList.add("is-far");
+            card.setAttribute("aria-hidden", "true");
+          }
+
+          // في اتجاه RTL: الانتقال للرسالة التالية يحرك البطاقات لليمين وتدخل الجديدة من اليسار
+          const translateX = -diff * baseStepX + dragOffsetPx;
+          const scale = diff === 0 ? 1 : Math.abs(diff) === 1 ? 0.88 : 0.76;
+          const rotateY = prefersReducedMotion ? 0 : diff * 8;
+
+          card.style.transform = `translate3d(${translateX}px, 0, 0) scale(${scale}) rotateY(${rotateY}deg)`;
+        });
+
+        this.dotElements.forEach((dot, index) => {
+          const isActive = index === this.activeCardIndex;
+          dot.classList.toggle("is-active", isActive);
+          dot.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        if (this.prevCardBtn) {
+          this.prevCardBtn.disabled = this.activeCardIndex <= 0;
+        }
+        if (this.nextCardBtn) {
+          this.nextCardBtn.disabled = this.activeCardIndex >= total - 1;
+        }
+      }
+
+      goToCard(targetIndex, withSparkleEffect = false) {
+        const total = this.cardElements.length;
+        if (total === 0) return;
+
+        const clamped = Math.max(0, Math.min(total - 1, targetIndex));
+        const changed = clamped !== this.activeCardIndex;
+        this.activeCardIndex = clamped;
+        this.updateCarouselPositions(0);
+
+        if (changed && withSparkleEffect) {
+          const rect = this.carouselViewport.getBoundingClientRect();
+          const cx = rect.left + rect.width * (0.35 + Math.random() * 0.3);
+          const cy = rect.top + rect.height * 0.25;
+          this.ambientEngine.launchFirework(cx, cy, 18);
+        }
+
+        // تأثير احتفالي أكبر عند الوصول إلى آخر رسالة
+        if (this.activeCardIndex === total - 1 && !this.hasCelebratedLastCard && this.currentScreen === "messages") {
+          this.hasCelebratedLastCard = true;
+          this.finaleSection.classList.add("is-celebrating");
+          this.ambientEngine.launchCelebrationSalvo(3);
+        }
+      }
+
+      clearRevealTimers() {
+        while (this.revealTimers.length > 0) {
+          clearTimeout(this.revealTimers.pop());
+        }
+      }
+
+      startOpeningSequence() {
+        this.clearRevealTimers();
+        this.greetingTitle.classList.remove("is-visible");
+        this.greetingSubtitle.classList.remove("is-visible");
+        this.greetingCta.classList.remove("is-visible");
+        this.treeCrownGlow.classList.remove("is-blooming");
+        this.treeEngine.resetAndPlay();
+      }
+
+      handleTreeGrowthCompleted() {
+        this.treeCrownGlow.classList.add("is-blooming");
+        this.greetingTitle.classList.add("is-visible");
+
+        const t1 = setTimeout(() => {
+          this.greetingSubtitle.classList.add("is-visible");
+        }, prefersReducedMotion ? 100 : 750);
+
+        const t2 = setTimeout(() => {
+          this.greetingCta.classList.add("is-visible");
+        }, prefersReducedMotion ? 200 : 1550);
+
+        this.revealTimers.push(t1, t2);
+      }
+
+      transitionToMessagesScreen() {
+        if (this.currentScreen === "messages") return;
+        this.currentScreen = "messages";
+        this.ambientEngine.setScreenMode("messages");
+
+        // انفجار احتفالي متزامن مع الانتقال
+        this.ambientEngine.launchCelebrationSalvo(2);
+
+        this.openingScreen.classList.remove("screen--active");
+        this.openingScreen.classList.add("screen--hidden");
+
+        this.messagesScreen.classList.remove("screen--hidden");
+        this.messagesScreen.classList.add("screen--active");
+
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+        this.updateCarouselPositions(0);
+
+        // إذا كانت هناك رسالة واحدة فقط، نفعّل احتفال النهاية
+        if (FRIENDS_MESSAGES.length === 1 && !this.hasCelebratedLastCard) {
+          this.hasCelebratedLastCard = true;
+          this.finaleSection.classList.add("is-celebrating");
+        }
+      }
+
+      replayCelebration() {
+        this.clearRevealTimers();
+        this.currentScreen = "opening";
+        this.ambientEngine.setScreenMode("opening");
+
+        // إعادة مؤشرات التنقل والرسائل إلى وضعها الأولي النظيف
+        this.activeCardIndex = 0;
+        this.hasCelebratedLastCard = false;
+        this.finaleSection.classList.remove("is-celebrating");
+        this.updateCarouselPositions(0);
+
+        this.messagesScreen.classList.remove("screen--active");
+        this.messagesScreen.classList.add("screen--hidden");
+
+        this.openingScreen.classList.remove("screen--hidden");
+        this.openingScreen.classList.add("screen--active");
+
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+        this.ambientEngine.launchFirework(window.innerWidth * 0.5, window.innerHeight * 0.3, 28);
+        this.startOpeningSequence();
+      }
+
+      bindEvents() {
+        // 1. الأزرار الرئيسية
+        this.openMessagesBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          this.transitionToMessagesScreen();
+        });
+
+        this.replayBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          this.replayCelebration();
+        });
+
+        this.prevCardBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          this.goToCard(this.activeCardIndex - 1, true);
+        });
+
+        this.nextCardBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          this.goToCard(this.activeCardIndex + 1, true);
+        });
+
+        // 2. التنقل بلوحة المفاتيح (الأسهم اليمنى واليسرى في RTL)
+        window.addEventListener("keydown", (e) => {
+          if (this.currentScreen !== "messages") return;
+          if (e.key === "ArrowLeft") {
+            // في اتجاه RTL السهم الأيسر ينقل إلى الرسالة التالية
+            e.preventDefault();
+            this.goToCard(this.activeCardIndex + 1, true);
+          } else if (e.key === "ArrowRight") {
+            // السهم الأيمن ينقل إلى الرسالة السابقة
+            e.preventDefault();
+            this.goToCard(this.activeCardIndex - 1, true);
+          }
+        });
+
+        // 3. السحب بالإصبع على الهاتف (Touch) دون إعاقة التمرير الرأسي
+        this.carouselViewport.addEventListener(
+          "touchstart",
+          (e) => {
+            if (e.touches.length !== 1) return;
+            this.isDragging = true;
+            this.isHorizontalSwipe = null;
+            this.dragStartX = e.touches[0].clientX;
+            this.dragStartY = e.touches[0].clientY;
+            this.dragDeltaX = 0;
+          },
+          { passive: true }
+        );
+
+        this.carouselViewport.addEventListener(
+          "touchmove",
+          (e) => {
+            if (!this.isDragging || e.touches.length !== 1) return;
+            const dx = e.touches[0].clientX - this.dragStartX;
+            const dy = e.touches[0].clientY - this.dragStartY;
+
+            if (this.isHorizontalSwipe === null) {
+              if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+                this.isHorizontalSwipe = Math.abs(dx) > Math.abs(dy);
+              }
+            }
+
+            if (this.isHorizontalSwipe) {
+              this.dragDeltaX = dx;
+              this.updateCarouselPositions(dx * 0.65);
+            }
+          },
+          { passive: true }
+        );
+
+        const finishTouchDrag = () => {
+          if (!this.isDragging) return;
+          this.isDragging = false;
+          const threshold = 44;
+          // في RTL: السحب لليمين (dx > 0) يذهب للبطاقة التالية، والسحب لليسار (dx < 0) يذهب للبطاقة السابقة
+          if (this.isHorizontalSwipe && Math.abs(this.dragDeltaX) > threshold) {
+            if (this.dragDeltaX > 0) {
+              this.goToCard(this.activeCardIndex + 1, true);
+            } else {
+              this.goToCard(this.activeCardIndex - 1, true);
+            }
+          } else {
+            this.updateCarouselPositions(0);
+          }
+          setTimeout(() => {
+            this.dragDeltaX = 0;
+          }, 50);
+        };
+
+        this.carouselViewport.addEventListener("touchend", finishTouchDrag, { passive: true });
+        this.carouselViewport.addEventListener("touchcancel", finishTouchDrag, { passive: true });
+
+        // 4. السحب بالماوس على أجهزة الكمبيوتر
+        this.carouselViewport.addEventListener("mousedown", (e) => {
+          if (e.button !== 0) return;
+          this.isDragging = true;
+          this.dragStartX = e.clientX;
+          this.dragDeltaX = 0;
+          this.carouselViewport.classList.add("is-dragging");
+        });
+
+        window.addEventListener("mousemove", (e) => {
+          if (!this.isDragging) return;
+          this.dragDeltaX = e.clientX - this.dragStartX;
+          this.updateCarouselPositions(this.dragDeltaX * 0.65);
+        });
+
+        window.addEventListener("mouseup", () => {
+          if (!this.isDragging) return;
+          this.isDragging = false;
+          this.carouselViewport.classList.remove("is-dragging");
+          const threshold = 50;
+          if (Math.abs(this.dragDeltaX) > threshold) {
+            if (this.dragDeltaX > 0) {
+              this.goToCard(this.activeCardIndex + 1, true);
+            } else {
+              this.goToCard(this.activeCardIndex - 1, true);
+            }
+          } else {
+            this.updateCarouselPositions(0);
+          }
+          setTimeout(() => {
+            this.dragDeltaX = 0;
+          }, 50);
+        });
+
+        // 5. النقر على أي مساحة فارغة في الخلفية لإطلاق ألعاب نارية احتفالية
+        document.addEventListener("click", (e) => {
+          const target = e.target;
+          if (
+            target.closest("button") ||
+            target.closest(".message-card.is-active") ||
+            target.closest("a")
+          ) {
+            return;
+          }
+          this.ambientEngine.launchFirework(e.clientX, e.clientY, 28);
+        });
+
+        // 6. الاستجابة لتغيير حجم الشاشة
+        window.addEventListener("resize", () => {
+          this.ambientEngine.resize();
+          if (this.currentScreen === "opening") {
+            this.treeEngine.resize();
+            this.treeEngine.buildTreeStructure();
+          }
+          this.updateCarouselPositions(0);
+        });
+      }
+
+      startAnimationLoop() {
+        const tick = (now) => {
+          this.ambientEngine.updateAndDraw(now);
+          if (this.currentScreen === "opening") {
+            this.treeEngine.updateAndDraw(now);
+          }
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }
+
+    // تشغيل التجربة فور جاهزية الصفحة
+    window.addEventListener("DOMContentLoaded", () => {
+      new BirthdayExperienceController();
+    });
+  </script>
+</body>
+</html>
